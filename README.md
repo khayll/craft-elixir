@@ -1,4 +1,4 @@
-# Otp [![build status](https://circleci.com/gh/khayll/craft-elixir.png?circle-token=:circle-token)](https://circleci.com/gh/khayll/craft-elixir.png?circle-token=:circle-token)
+# Otp [![build status](https://circleci.com/gh/khayll/craft-elixir.png?circle-token=:circle-token)](https://circleci.com/gh/khayll/craft-elixir)
 
 Craft-conf Elixir coding session
 
