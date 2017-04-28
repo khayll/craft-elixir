@@ -1,6 +1,6 @@
 # Otp
 
-**TODO: Add description**
+Craft-conf Elixir coding session
 
 ## Installation
 
