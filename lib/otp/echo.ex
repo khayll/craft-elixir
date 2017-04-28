@@ -14,6 +14,9 @@ defmodule OTP.Echo do
            {msg, caller} ->
                Kernel.send(caller, msg)
                loop()
+            # catch all to prevent memory overflow
+            _msg ->
+                loop()
         end
     end
 end
