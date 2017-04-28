@@ -12,7 +12,8 @@ defmodule OTP.Echo do
     def loop do
         receive do
            {msg, caller} ->
-               Kernel.send(caller, msg) 
+               Kernel.send(caller, msg)
+               loop()
         end
     end
 end

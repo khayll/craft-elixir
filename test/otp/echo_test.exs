@@ -8,5 +8,8 @@ defmodule OTP.EchoTest do
 
         Echo.send(pid, :hello)
         assert_receive :hello
+
+        Echo.send(pid, :hello)
+        assert_receive :hello
     end
 end
