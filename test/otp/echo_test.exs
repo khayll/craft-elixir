@@ -6,10 +6,10 @@ defmodule OTP.EchoTest do
     test "echo" do
         {:ok, pid} = Echo.start_link()
 
-        Echo.send(pid, :hello)
+        Echo.async_send(pid, :hello)
         assert_receive :hello
 
-        Echo.send(pid, :hello)
+        Echo.async_send(pid, :hello)
         assert_receive :hello
 
         send(pid, :another_message)
@@ -21,5 +21,11 @@ defmodule OTP.EchoTest do
         
         Process.sleep(51)
         refute Process.alive?(pid)
+    end
+
+    test "sync echo" do
+        {:ok, pid} = Echo.start_link()
+
+        assert :hello == Echo.sync_send(pid, :hello)
     end
 end
