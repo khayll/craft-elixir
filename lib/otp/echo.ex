@@ -3,7 +3,10 @@ defmodule OTP.Echo do
 
     def start_link do
         # m, f, a
-        pid = spawn_link(OTP.Echo, :loop, [])
+        #pid = spawn_link(OTP.Echo, :loop, [])
+
+        #using spwan_link with the loop function with 0 parameters
+        pid = spawn_link(&loop/0)
         {:ok, pid}
     end
 
@@ -18,7 +21,8 @@ defmodule OTP.Echo do
         Kernel.send(pid, {msg, self()})
     end
 
-    def loop do
+    #p in defp makes it private
+    defp loop do
         receive do
            {msg, caller} ->
                Kernel.send(caller, msg)
