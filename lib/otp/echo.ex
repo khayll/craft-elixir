@@ -1,5 +1,6 @@
 defmodule OTP.Echo do
     @receive_timeout 50
+    @send_timeout 10
 
     def start_link do
         # m, f, a
@@ -14,6 +15,9 @@ defmodule OTP.Echo do
         async_send(pid, msg)
         receive do 
             msg -> msg
+        after
+            @send_timeout ->
+                {:error, :timeout}
         end
     end
 
@@ -24,9 +28,12 @@ defmodule OTP.Echo do
     #p in defp makes it private
     defp loop do
         receive do
-           {msg, caller} ->
-               Kernel.send(caller, msg)
-               loop()
+            # unused variable is prefixed by _ (or you can just use an _)
+            {:no_reply, _caller} ->
+                loop()
+            {msg, caller} ->
+                Kernel.send(caller, msg)
+                loop()
             # catch all to prevent memory overflow
             _msg ->
                 loop()
