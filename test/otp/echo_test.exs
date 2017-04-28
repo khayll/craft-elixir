@@ -34,4 +34,11 @@ defmodule OTP.EchoTest do
 
         assert {:error, :timeout} = Echo.sync_send(pid, :no_reply)
     end
+
+    test "sync msg race condition" do
+        {:ok, pid} = Echo.start_link()
+
+        Kernel.send(self(), :long_computation)
+        assert :long_computation == Echo.sync_send(pid, :no_reply)        
+    end
 end

@@ -31,6 +31,9 @@ defmodule OTP.Echo do
             # unused variable is prefixed by _ (or you can just use an _)
             {:no_reply, _caller} ->
                 loop()
+            {:long_computation, caller} ->
+                Process.sleep(@send_timeout + 1)
+                Kernel.send(caller, :long_computation)
             {msg, caller} ->
                 Kernel.send(caller, msg)
                 loop()
